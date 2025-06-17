@@ -51,12 +51,11 @@ The following SQL queries were developed to answer specific business questions:
 
 1. **Which job categories had the highest YES response ?**
    ```sql
-	select top 1 job ,count(*) total_clients
-	from BankingCallData
-	where y ='yes'
-	group by job
-	order by  total_clients desc
-
+      select top 1 job ,count(*) total_clients
+      from BankingCallData
+      where y ='yes'
+      group by job
+      order by  total_clients desc
    ```
 2. **Does the duration of the call correlate with a higher success rate?** 
  ```sql
