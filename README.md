@@ -14,16 +14,16 @@ This project demonstrates SQL skills for data exploration, profiling, and answer
 
 ### 1. Importing the Dataset
 
-- **The original dataset was provided as a .csv file.
-- **It was imported into a SQL database (BankingCallData) using SQL Server.
-- **Columns were cleaned and structured appropriately to ensure accurate querying and analysis.
+- The original dataset was provided as a .csv file.
+- It was imported into a SQL database (BankingCallData) using SQL Server.
+- Columns were cleaned and structured appropriately to ensure accurate querying and analysis.
 
 ### 2. Data Exploration & Cleaning
 
-- **Record Count: Determine the total number of records in the dataset.
-- **Customer Count: Find out how many unique customers are in the dataset.
-- **Category Count: Identify all unique product categories in the dataset.
-- **Null Value Check: Check for any null values in the dataset and delete records with missing data.
+- Record Count: Determine the total number of records in the dataset.
+- Customer Count: Find out how many unique customers are in the dataset.
+- Category Count: Identify all unique product categories in the dataset.
+- Null Value Check: Check for any null values in the dataset and delete records with missing data.
   
 ```sql
 select COUNT(*) from BankingCallData
@@ -171,17 +171,17 @@ The following SQL queries were developed to answer specific business questions:
 
 ## Findings
 
-- **Call duration positively correlates with subscription likelihood
-- **Higher balances often result in improved conversion rates
-- **Clients with loans show distinct behavior—insights guide targeted strategies
-- **Repeated contact tends to increase subscription chances
+- Call duration positively correlates with subscription likelihood
+- Higher balances often result in improved conversion rates
+- Clients with loans show distinct behavior—insights guide targeted strategies
+- Repeated contact tends to increase subscription chances
 
 ## Recommendations
-- **Prioritize high-balance customers who are more likely to subscribe.
-- **Focus on longer high-quality calls to improve engagement and conversion.
-- **Avoid excessive repeat contacts, but consider a second follow-up if the first call fails.
-- **Target specific job segments (e.g., management, retired) and education levels that show higher success.
-- **Exclude or deprioritize contacts with unknown or incomplete profiles, especially in job and education.
+- Prioritize high-balance customers who are more likely to subscribe.
+- Focus on longer high-quality calls to improve engagement and conversion.
+- Avoid excessive repeat contacts, but consider a second follow-up if the first call fails.
+- Target specific job segments (e.g., management, retired) and education levels that show higher success.
+- Exclude or deprioritize contacts with unknown or incomplete profiles, especially in job and education.
 
 ## Conclusion
 This analysis provided actionable insights into customer behavior and the effectiveness of telemarketing campaigns. Key findings include the positive impact of longer call durations, the significance of customer financial profiles (such as balance and loan status), and the improved success rate when customers are contacted multiple times. Demographic factors like job and education also played a role in campaign response.
