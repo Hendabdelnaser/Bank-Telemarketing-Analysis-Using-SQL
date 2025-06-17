@@ -72,26 +72,25 @@ order by  total_clients desc
 
 -- Q.2 Does the duration of the call correlate with a higher success rate?
 select 
-    case 
-        when duration < 60 then 'Under 1 min'
-        when duration BETWEEN 60 AND 120 then '1-2 min'
-        when duration BETWEEN 121 AND 300 then '2-5 min'
-        when duration BETWEEN 301 AND 600 then '5-10 min'
-        else 'Over 10 min'
-    end duration_group,
-    count(*) AS total_calls,
-    sum(case when y = 'yes' then 1 else 0 end) yes_count,
-    round(avg(case when y = 'yes' then 1.0 else 0 end) * 100, 2) as success_rate_percentage
-from BankingCallData
-group by 
-	case 
-        when duration < 60 then 'Under 1 min'
-        when duration BETWEEN 60 AND 120 then '1-2 min'
-        when duration BETWEEN 121 AND 300 then '2-5 min'
-        when duration BETWEEN 301 AND 600 then '5-10 min'
-        else 'Over 10 min'
-    end
-order by success_rate_percentage DESC;
+     case 
+         when duration < 60 then 'Under 1 min'
+         when duration BETWEEN 60 AND 120 then '1-2 min'
+         when duration BETWEEN 121 AND 300 then '2-5 min'
+         when duration BETWEEN 301 AND 600 then '5-10 min'
+         else 'Over 10 min'
+     end duration_group,
+     count(*) AS total_calls,
+     count(case when y = 'yes' then 1 end) yes_count
+ from BankingCallData
+ group by 
+ 	case 
+         when duration < 60 then 'Under 1 min'
+         when duration BETWEEN 60 AND 120 then '1-2 min'
+         when duration BETWEEN 121 AND 300 then '2-5 min'
+         when duration BETWEEN 301 AND 600 then '5-10 min'
+         else 'Over 10 min'
+     end
+ order by yes_count
 
 -- Q.3 Which education levels responded most positively to the campaign?
 
