@@ -6,24 +6,24 @@ This project demonstrates SQL skills for data exploration, profiling, and answer
 
 ## Business Objectives
 
-1.Investigate the impact of call and account attributes on campaign success.
-2.Analyze customer behavior and campaign efficiency
-3.Provide insights to optimize future marketing strategies
+1. Investigate the impact of call and account attributes on campaign success.
+2. Analyze customer behavior and campaign efficiency
+3. Provide insights to optimize future marketing strategies
 
 ## Project Structure
 
-###1. Importing the Dataset
+### 1. Importing the Dataset
 
-- ** The original dataset was provided as a .csv file.
-- ** It was imported into a SQL database (BankingCallData) using SQL Server.
-- ** Columns were cleaned and structured appropriately to ensure accurate querying and analysis.
+- **The original dataset was provided as a .csv file.
+- **It was imported into a SQL database (BankingCallData) using SQL Server.
+- **Columns were cleaned and structured appropriately to ensure accurate querying and analysis.
 
-###2. Data Exploration & Cleaning
+### 2. Data Exploration & Cleaning
 
-- ** Record Count: Determine the total number of records in the dataset.
-- ** Customer Count: Find out how many unique customers are in the dataset.
-- ** Category Count: Identify all unique product categories in the dataset.
-- ** Null Value Check: Check for any null values in the dataset and delete records with missing data.
+- **Record Count: Determine the total number of records in the dataset.
+- **Customer Count: Find out how many unique customers are in the dataset.
+- **Category Count: Identify all unique product categories in the dataset.
+- **Null Value Check: Check for any null values in the dataset and delete records with missing data.
   
 ```sql
 select COUNT(*) from BankingCallData
@@ -45,11 +45,11 @@ from BankingCallData
 select distinct contact   
 from BankingCallData
 ```
-###3. Key Analysis & SQL Queries
+### 3. Key Analysis & SQL Queries
 
 The following SQL queries were developed to answer specific business questions:
 
-1. ** Which job categories had the highest YES response ?**
+1. **Which job categories had the highest YES response ?**
    ```sql
       select top 1 job ,count(*) total_clients
       from BankingCallData
@@ -57,7 +57,7 @@ The following SQL queries were developed to answer specific business questions:
       group by job
       order by  total_clients desc
    ```
-2.** Does the duration of the call correlate with a higher success rate?** 
+2. **Does the duration of the call correlate with a higher success rate?** 
  ```sql
     select 
       case 
@@ -80,7 +80,7 @@ The following SQL queries were developed to answer specific business questions:
       end
   order by yes_count
    ```
-3.** Which education levels responded most positively to the campaign?** 
+3. **Which education levels responded most positively to the campaign?** 
  ```sql
     select education , count (*) Total_Yes_Count
     from BankingCallData
@@ -88,13 +88,13 @@ The following SQL queries were developed to answer specific business questions:
     group by education
     order by  Total_Yes_Count Desc
    ```
-4.** What is the average number of calls needed?** 
+4. **What is the average number of calls needed?** 
  ```sql
     select y , count(*) Total_Clients , AVG(campaign) avg_calls
     from BankingCallData
     group by y
    ```
-5.** Which day of the month had the highest total calls?** 
+5. **Which day of the month had the highest total calls?** 
  ```sql
     select
     month,day,Total_call
@@ -111,7 +111,7 @@ The following SQL queries were developed to answer specific business questions:
     where rank = 1
     order by month;
    ```
-6.** Are customers with higher account balances more likely to say yes?** 
+6. **Are customers with higher account balances more likely to say yes?** 
  ```sql
      select 
         case 
@@ -134,14 +134,14 @@ The following SQL queries were developed to answer specific business questions:
         end
     order by yes_clients DESC
    ```
-7.** Do customers with housing or personal loans respond differently?** 
+7. **Do customers with housing or personal loans respond differently?** 
  ```sql
     select housing,loan,SUM(case when y = 'yes' then 1 else 0 end) yes_count,
     SUM(case when y = 'no' then 1 else 0 end) no_count,COUNT(*)  total_clients
     from BankingCallData
     group by housing, loan
    ```
-8.** What are the characteristics of the customers who said yes?** 
+8. **What are the characteristics of the customers who said yes?** 
  ```sql
     select job, marital, education, MIN(age) min_age, MAX(age)  max_age,AVG(age) avg_age,
         COUNT(*) AS total_yes_customers
@@ -150,7 +150,7 @@ The following SQL queries were developed to answer specific business questions:
     GROUP BY job, marital, education
     ORDER BY total_yes_customers DESC;
    ```
-9.** How many 'unknown' values found in columns?** 
+9. **How many 'unknown' values found in columns?** 
  ```sql
     select count (case when job ='unknown' then 1 end ) count_of_unknown_job,
     count (case when education ='unknown' then 1 end ) count_of_unknown_education,
@@ -158,7 +158,7 @@ The following SQL queries were developed to answer specific business questions:
     count (case when poutcome ='unknown' then 1 end ) count_of_unknown_poutcome
     from BankingCallData
    ```
-10.** Does contacting a customer more than once improve the chance they say "yes"?** 
+10. **Does contacting a customer more than once improve the chance they say "yes"?** 
  ```sql
     select case when campaign >1 then 'Contacted More Than Once' 
     	        when campaign =1 then 'Contacted Once' end contact_frequency,
@@ -171,17 +171,17 @@ The following SQL queries were developed to answer specific business questions:
 
 ## Findings
 
-- ** Call duration positively correlates with subscription likelihood
-- ** Higher balances often result in improved conversion rates
-- ** Clients with loans show distinct behavior—insights guide targeted strategies
-- ** Repeated contact tends to increase subscription chances
+- **Call duration positively correlates with subscription likelihood
+- **Higher balances often result in improved conversion rates
+- **Clients with loans show distinct behavior—insights guide targeted strategies
+- **Repeated contact tends to increase subscription chances
 
 ## Recommendations
-- ** Prioritize high-balance customers who are more likely to subscribe.
-- ** Focus on longer high-quality calls to improve engagement and conversion.
-- ** Avoid excessive repeat contacts, but consider a second follow-up if the first call fails.
-- ** Target specific job segments (e.g., management, retired) and education levels that show higher success.
-- ** Exclude or deprioritize contacts with unknown or incomplete profiles, especially in job and education.
+- **Prioritize high-balance customers who are more likely to subscribe.
+- **Focus on longer high-quality calls to improve engagement and conversion.
+- **Avoid excessive repeat contacts, but consider a second follow-up if the first call fails.
+- **Target specific job segments (e.g., management, retired) and education levels that show higher success.
+- **Exclude or deprioritize contacts with unknown or incomplete profiles, especially in job and education.
 
 ## Conclusion
 This analysis provided actionable insights into customer behavior and the effectiveness of telemarketing campaigns. Key findings include the positive impact of longer call durations, the significance of customer financial profiles (such as balance and loan status), and the improved success rate when customers are contacted multiple times. Demographic factors like job and education also played a role in campaign response.
